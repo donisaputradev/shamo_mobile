@@ -1,10 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/auth/auth.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> {
+  @override
+  void initState() {
+    navigate();
+    super.initState();
+  }
+
+  void navigate() async {
+    await Future.delayed(const Duration(seconds: 3));
+    login();
+  }
+
+  void login() {
+    Navigator.pushNamedAndRemoveUntil(
+        context, LoginPage.routeName, (route) => false);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +34,10 @@ class SplashPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SvgPicture.asset(MainAssets.logo),
+            Image.asset(
+              MainAssets.logo,
+              width: Dimens.width(context) / 3,
+            ),
             Dimens.dp40.height,
             HeadingText(
               AppConfig.appName.toUpperCase(),

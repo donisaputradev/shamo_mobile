@@ -6,7 +6,7 @@ class MainAssets {
   static const _baseImagePath = 'assets/images';
 
   // Bitmap
-  static const backgroundImg = '$_baseImagePath/bitmap/background.webp';
+  static const logo = '$_baseImagePath/bitmap/logo.webp';
   static const splashLogoImg = '$_baseImagePath/bitmap/splash_logo.webp';
   static const googleImg = '$_baseImagePath/bitmap/icon_google.webp';
   static const bgLogoImg = '$_baseImagePath/bitmap/bg_logo.webp';
@@ -17,9 +17,6 @@ class MainAssets {
   // Illustration
   static const banner1Img = '$_baseImagePath/illustration/banner1.webp';
   static const banner2Img = '$_baseImagePath/illustration/banner2.webp';
-
-  // SVG
-  static const logo = '$_baseImagePath/svg/logo.svg';
 
   // ---------------------------- END IMAGES -----------------------------------
 

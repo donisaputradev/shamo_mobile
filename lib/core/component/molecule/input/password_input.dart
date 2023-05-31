@@ -41,6 +41,7 @@ class _PasswordInputState extends State<PasswordInput> {
   @override
   Widget build(BuildContext context) {
     return RegularInput(
+      prefixIcon: Icons.lock,
       errorText: widget.errorText,
       controller: widget.controller,
       hintText: widget.hintText,
@@ -69,6 +70,7 @@ class _PasswordInputState extends State<PasswordInput> {
       child: Icon(
         isVisible ? Icons.visibility_outlined : Icons.visibility_off_outlined,
         size: Dimens.dp18,
+        color: context.theme.primaryColor,
       ),
     );
   }

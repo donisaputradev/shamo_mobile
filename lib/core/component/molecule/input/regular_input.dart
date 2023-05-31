@@ -99,8 +99,7 @@ class RegularInput extends StatelessWidget {
                   : (prefixIcon != null
                       ? Icon(
                           prefixIcon,
-                          size: Dimens.dp18,
-                          color: disabledColor ?? textColor,
+                          color: disabledColor ?? context.theme.primaryColor,
                         )
                       : null),
               counterText: '',

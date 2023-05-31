@@ -1,13 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shamo_mobile/features/auth/auth.dart';
 
 final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
-    case '/home':
+    case LoginPage.routeName:
       return MaterialPageRoute(
-        builder: (_) => const Scaffold(),
+        builder: (_) => const LoginPage(),
+        settings: settings,
+      );
+    case RegisterPage.routeName:
+      return MaterialPageRoute(
+        builder: (_) => const RegisterPage(),
         settings: settings,
       );
     default:

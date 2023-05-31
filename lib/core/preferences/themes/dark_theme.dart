@@ -43,8 +43,8 @@ class DarkTheme {
             borderRadius: BorderRadius.circular(Dimens.dp16),
           ),
           padding: const EdgeInsets.symmetric(
-            vertical: Dimens.dp14,
-            horizontal: Dimens.dp24,
+            horizontal: Dimens.dp16,
+            vertical: Dimens.dp12,
           ),
           textStyle: text.labelLarge?.copyWith(
             color: primaryColor,
@@ -55,19 +55,18 @@ class DarkTheme {
 
   ElevatedButtonThemeData get elevatedButton => ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          foregroundColor: scheme.onPrimary,
+          foregroundColor: textSolidColor,
           backgroundColor: primaryColor,
           disabledBackgroundColor: primaryColor.withOpacity(.3),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(Dimens.dp16),
+            borderRadius: BorderRadius.circular(Dimens.dp12),
           ),
-          shadowColor: Colors.transparent,
           padding: const EdgeInsets.symmetric(
-            vertical: Dimens.dp14,
-            horizontal: Dimens.dp32,
+            horizontal: Dimens.dp16,
+            vertical: Dimens.dp12,
           ),
           textStyle: text.labelLarge?.copyWith(
-            color: scheme.onPrimary,
+            color: textSolidColor,
             fontFamily: AppConfig.fontFamily,
           ),
         ),
@@ -121,40 +120,34 @@ class DarkTheme {
           horizontal: Dimens.dp16,
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: primaryColor.withOpacity(.3),
-          ),
-          borderRadius: BorderRadius.circular(Dimens.dp16),
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(Dimens.dp12),
         ),
         disabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: primaryColor.withOpacity(.3),
-          ),
-          borderRadius: BorderRadius.circular(Dimens.dp16),
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(Dimens.dp12),
         ),
         border: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: primaryColor.withOpacity(.3),
-          ),
-          borderRadius: BorderRadius.circular(Dimens.dp16),
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(Dimens.dp12),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: primaryColor,
           ),
-          borderRadius: BorderRadius.circular(Dimens.dp16),
+          borderRadius: BorderRadius.circular(Dimens.dp12),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: errorColor,
           ),
-          borderRadius: BorderRadius.circular(Dimens.dp16),
+          borderRadius: BorderRadius.circular(Dimens.dp12),
         ),
         errorBorder: OutlineInputBorder(
           borderSide: BorderSide(
             color: errorColor,
           ),
-          borderRadius: BorderRadius.circular(Dimens.dp16),
+          borderRadius: BorderRadius.circular(Dimens.dp12),
         ),
       );
 
@@ -230,7 +223,7 @@ class DarkTheme {
         ),
 
         labelLarge: const TextStyle(
-          fontSize: Dimens.dp18,
+          fontSize: Dimens.dp16,
           fontWeight: FontWeight.w500,
           fontFamily: AppConfig.fontFamily,
         ),

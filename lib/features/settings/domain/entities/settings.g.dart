@@ -11,8 +11,8 @@ Settings _$SettingsFromJson(Map<String, dynamic> json) => Settings(
           ? null
           : Language.fromJson(json['language'] as Map<String, dynamic>),
       theme: $enumDecodeNullable(_$AppThemeEnumMap, json['theme'],
-              unknownValue: AppTheme.light) ??
-          AppTheme.light,
+              unknownValue: AppTheme.dark) ??
+          AppTheme.dark,
     );
 
 Map<String, dynamic> _$SettingsToJson(Settings instance) {
