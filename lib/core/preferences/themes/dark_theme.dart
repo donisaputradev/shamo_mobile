@@ -288,6 +288,7 @@ class DarkTheme {
       dividerTheme: divider,
       colorScheme: scheme.copyWith(error: errorColor),
       bottomAppBarTheme: bottomAppBar,
+      cardColor: cardColor,
     );
   }
 }

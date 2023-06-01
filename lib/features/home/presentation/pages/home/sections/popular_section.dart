@@ -25,7 +25,7 @@ class _PopularSection extends StatelessWidget {
                     children: [
                       const SmartNetworkImage(
                         'https://asset.kompas.com/crops/0goP7FKwWF1qhOgFdSg5Q9QEOXg=/14x0:547x355/750x500/data/photo/2020/02/03/5e37dfdc0013d.png',
-                        width: 215,
+                        width: 190,
                         height: 150,
                         fit: BoxFit.cover,
                         radius: BorderRadius.vertical(
