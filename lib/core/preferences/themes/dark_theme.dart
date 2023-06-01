@@ -86,11 +86,12 @@ class DarkTheme {
 
   AppBarTheme get appBar => AppBarTheme(
         color: appBarColor,
+        centerTitle: true,
         titleTextStyle: text.titleLarge?.copyWith(
           fontFamily: AppConfig.fontFamily,
           color: textSolidColor,
           fontWeight: FontWeight.w600,
-          fontSize: Dimens.dp24,
+          fontSize: Dimens.dp16,
         ),
         toolbarTextStyle: text.titleLarge?.copyWith(
           color: textSolidColor,

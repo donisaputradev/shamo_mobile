@@ -8,6 +8,10 @@ class MainAssets {
   // Bitmap
   static const logo = '$_baseImagePath/bitmap/logo.webp';
   static const user = '$_baseImagePath/bitmap/user.webp';
+  static const cart = '$_baseImagePath/bitmap/cart.webp';
+  static const love = '$_baseImagePath/bitmap/love.webp';
+  static const success = '$_baseImagePath/bitmap/success.webp';
+  static const headset = '$_baseImagePath/bitmap/headset.webp';
 
   // Icon
   static const logoIconImg = '$_baseImagePath/icons/ic_logo.webp';
