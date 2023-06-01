@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/auth/auth.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 
 part 'sections/profile_section.dart';
@@ -27,7 +28,10 @@ class AccountPage extends StatelessWidget {
           const _GeneralSection(),
           (Dimens.height(context) / 10).height,
           OutlinedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, LoginPage.routeName, (route) => false);
+            },
             child: const Text('Log out'),
           ),
         ],
