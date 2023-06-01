@@ -173,8 +173,7 @@ class _PhoneTextInputState extends State<PhoneTextInput> {
           context,
           phone.dialCode,
           style: TextStyle(
-            fontSize: 14,
-            color: context.theme.scaffoldBackgroundColor,
+            color: context.adaptiveTheme.solidTextColor,
           ),
         ),
       ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/home/home.dart';
 
 part 'sections/form_section.dart';
 
@@ -17,9 +18,9 @@ class RegisterPage extends StatelessWidget {
           Dimens.dp32.height,
           const HeadingText('Create Account'),
           const RegularText('Register and Happy Shoping'),
-          (Dimens.height(context) / 15).height,
+          (Dimens.height(context) / 18).height,
           const _FromSection(),
-          (Dimens.height(context) / 7).height,
+          (Dimens.height(context) / 18).height,
           GestureDetector(
             onTap: () {
               Navigator.pop(context);

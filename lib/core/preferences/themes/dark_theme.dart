@@ -155,7 +155,7 @@ class DarkTheme {
         backgroundColor: cardColor,
         elevation: 8,
         type: BottomNavigationBarType.fixed,
-        unselectedItemColor: secondaryColor,
+        unselectedItemColor: disabledColor,
         selectedLabelStyle: const TextStyle(
           fontSize: Dimens.dp12,
           fontFamily: AppConfig.fontFamily,
@@ -237,8 +237,9 @@ class DarkTheme {
 
   FloatingActionButtonThemeData get floatingButton =>
       FloatingActionButtonThemeData(
-        backgroundColor: primaryColor,
+        backgroundColor: secondaryColor,
         elevation: 2,
+        foregroundColor: textSolidColor,
       );
 
   BottomSheetThemeData get bottomSheet => BottomSheetThemeData(
@@ -253,6 +254,12 @@ class DarkTheme {
   DividerThemeData get divider => DividerThemeData(
         color: dividerColor,
         thickness: 1,
+      );
+
+  BottomAppBarTheme get bottomAppBar => BottomAppBarTheme(
+        color: cardColor,
+        padding: EdgeInsets.zero,
+        shape: const CircularNotchedRectangle(),
       );
 
   ThemeData get toTheme {
@@ -279,6 +286,7 @@ class DarkTheme {
       bottomSheetTheme: bottomSheet,
       dividerTheme: divider,
       colorScheme: scheme.copyWith(error: errorColor),
+      bottomAppBarTheme: bottomAppBar,
     );
   }
 }

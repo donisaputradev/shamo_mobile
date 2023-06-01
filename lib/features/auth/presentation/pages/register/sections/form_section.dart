@@ -20,6 +20,12 @@ class _FromSection extends StatelessWidget {
           prefixIcon: Icons.data_usage_rounded,
         ),
         Dimens.dp16.height,
+        PhoneTextInput(
+          controller: TextEditingController(),
+          label: 'Phone number',
+          hintText: 'Your phone number',
+        ),
+        Dimens.dp16.height,
         const RegularInput(
           label: 'Email Address',
           hintText: 'Your email address',
@@ -33,7 +39,10 @@ class _FromSection extends StatelessWidget {
         ),
         Dimens.dp32.height,
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamedAndRemoveUntil(
+                context, MainPage.routeName, (route) => false);
+          },
           child: const Text('Create account'),
         ),
       ],
