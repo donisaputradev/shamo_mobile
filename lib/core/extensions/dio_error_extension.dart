@@ -3,33 +3,36 @@ import 'package:shamo_mobile/core/core.dart';
 
 extension DioErrorExtension on DioError {
   ServerException toServerException() {
+    final data = response?.data != null && response?.data['meta'] != null
+        ? Meta.fromJson(response?.data['meta'])
+        : null;
     switch (type) {
       case DioErrorType.badResponse:
         switch (response?.statusCode) {
           case 401:
             return UnAuthenticationServerException(
-              message: 'Unauthorized',
+              message: data?.message ?? 'Unauthorized',
               code: response?.statusCode,
             );
           case 403:
             return UnAuthorizeServerException(
-              message: 'Forbidden',
+              message: data?.message ?? 'Forbidden',
               code: response?.statusCode,
             );
           case 404:
             return NotFoundServerException(
-              message: 'Not found',
+              message: data?.message ?? 'Not found',
               code: response?.statusCode,
             );
           case 500:
           case 502:
             return InternalServerException(
-              message: 'Internal server error',
+              message: data?.message ?? 'Internal server error',
               code: response?.statusCode,
             );
           default:
             return GeneralServerException(
-              message: 'Internal server error',
+              message: data?.message ?? 'Internal server error',
               code: response?.statusCode,
             );
         }
@@ -38,7 +41,7 @@ extension DioErrorExtension on DioError {
       case DioErrorType.sendTimeout:
       case DioErrorType.receiveTimeout:
         return TimeOutServerException(
-          message: 'Connection timeout',
+          message: data?.message ?? 'Connection timeout',
           code: response?.statusCode,
         );
 
@@ -47,7 +50,7 @@ extension DioErrorExtension on DioError {
       case DioErrorType.connectionError:
       case DioErrorType.unknown:
         return GeneralServerException(
-          message: 'A Server Error Occurred',
+          message: data?.message ?? 'A Server Error Occurred',
           code: response?.statusCode,
         );
     }

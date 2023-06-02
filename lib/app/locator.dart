@@ -7,6 +7,7 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/auth/auth.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 
 final getIt = GetIt.instance;
@@ -16,6 +17,35 @@ Future<void> setupLocator() async {
   // |+-----------------------------------------------------------------------+|
   // |+                               FEATURES                                +|
   // |+-----------------------------------------------------------------------+|
+
+  // ------------------------------ AUTHENTICATION ---------------------------------
+  getIt
+    ..registerLazySingleton<AuthApiDataSource>(
+      () => AuthApiDataSourceImpl(
+        authLocalDataSource: getIt(),
+        dio: getIt(),
+      ),
+    )
+    ..registerLazySingleton<AuthLocalDataSource>(
+      () => AuthLocalDataSourceImpl(getIt()),
+    )
+    ..registerLazySingleton<AuthRepository>(
+      () => AuthRepositoryImpl(getIt()),
+    );
+
+  // Domain
+  getIt
+    ..registerLazySingleton(() => FetchUserUseCase(getIt()))
+    ..registerLazySingleton(() => LoginUseCase(getIt()))
+    ..registerLazySingleton(() => RegisterUseCase(getIt()))
+    ..registerLazySingleton(() => LogoutUseCase(getIt()));
+
+  // Presentation
+  getIt.registerFactory(
+    () => AuthBloc(fetchUserUseCase: getIt()),
+  );
+
+  // ------------------------------ END AUTHENTICATION -----------------------------
 
   // ------------------------------ SETTINGS ---------------------------------
 
@@ -73,12 +103,16 @@ Future<void> _setupCore() async {
   getIt.registerLazySingleton(
     () => CaptureErrorUseCase(),
   );
+
   getIt.registerLazySingleton(
     () => Dio()
-      ..options = BaseOptions(baseUrl: AppConfig.baseUrl.value)
-      ..interceptors.add(
+      ..options = BaseOptions(
+        baseUrl: AppConfig.baseUrl.value,
+      )
+      ..interceptors.addAll([
         LogInterceptor(requestBody: true, responseBody: true),
-      ),
+        AuthHttpInterceptor(authLocalDataSource: getIt(), onUnAuth: () {}),
+      ]),
   );
 
   if (!kIsWeb) {

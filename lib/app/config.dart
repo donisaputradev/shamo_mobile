@@ -20,13 +20,13 @@ class AppConfig {
   /// Base URL APIs App
   static const FlavorConfig<String> baseUrl = FlavorConfig<String>(
     /// Base URL in Production Mode
-    prod: 'https://api.example.com/v1',
+    prod: 'https://shamo.donisaputra.com/api',
 
     /// Base URL in Development Mode
-    dev: 'https://api.dev.example.com/v1',
+    dev: 'https://shamo.donisaputra.com/api',
 
     /// Base URL in Staging Mode
-    stag: 'https://api.stag.example.com/v1',
+    stag: 'https://shamo.donisaputra.com/api',
   );
 
   // ---------------------------------------------------------------------------

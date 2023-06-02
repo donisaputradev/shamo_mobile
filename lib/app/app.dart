@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/app/generate.dart';
 import 'package:shamo_mobile/core/core.dart';
+import 'package:shamo_mobile/features/auth/auth.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 import 'package:shamo_mobile/l10n/l10n.dart';
 
@@ -35,6 +36,7 @@ class App extends StatelessWidget {
           create: (context) =>
               GetIt.I<LanguageBloc>()..add(const LanguageStarted()),
         ),
+        BlocProvider(create: (context) => GetIt.I<AuthBloc>()),
       ],
       child: const _AppWidget(),
     );
