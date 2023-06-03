@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
         children: [
           Dimens.dp32.height,
           const HeadingText('Login'),
-          const RegularText('Sign In to Countinue'),
+          const RegularText('Sign In to Continue'),
           (Dimens.height(context) / 15).height,
           const _FormSection(),
           (Dimens.height(context) / 2.5).height,

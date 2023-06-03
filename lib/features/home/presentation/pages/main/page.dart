@@ -6,6 +6,7 @@ import 'package:shamo_mobile/features/cart/cart.dart';
 import 'package:shamo_mobile/features/chat/chat.dart';
 import 'package:shamo_mobile/features/favorite/favorite.dart';
 import 'package:shamo_mobile/features/home/home.dart';
+import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 
 class MainPage extends StatelessWidget {
@@ -36,6 +37,17 @@ class _MainViewState extends State<MainView> {
     const FavoritePage(),
     const AccountPage(),
   ];
+
+  @override
+  void initState() {
+    context.read<UserBloc>().add(GetUserDetailEvent());
+    context.read<CategoryBloc>().add(GetCategoriesEvent());
+    context.read<PopularBloc>().add(GetPopularProductEvent());
+    context.read<ProductBloc>().add(
+          const GetListProductEvent(page: 2, categoryId: ''),
+        );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

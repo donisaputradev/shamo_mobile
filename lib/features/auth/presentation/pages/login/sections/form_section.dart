@@ -14,7 +14,17 @@ class _FormSectionState extends State<_FormSection> {
   @override
   void initState() {
     context.read<AuthBloc>().add(InitializeAuthEvent());
+    emailController.addListener(_changeEmail);
+    passwordController.addListener(_changePassword);
     super.initState();
+  }
+
+  void _changeEmail() {
+    context.read<AuthBloc>().add(ChangeEmailEvent(emailController.text));
+  }
+
+  void _changePassword() {
+    context.read<AuthBloc>().add(ChangePasswordEvent(passwordController.text));
   }
 
   @override
@@ -22,7 +32,7 @@ class _FormSectionState extends State<_FormSection> {
     return BlocConsumer<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state.status == AuthStateStatus.loading) {
-          EasyLoading.show(status: 'Memuat');
+          EasyLoading.show(status: 'Loading...');
         } else if (state.status == AuthStateStatus.authenticated) {
           EasyLoading.dismiss();
           Navigator.pushNamedAndRemoveUntil(
@@ -47,23 +57,25 @@ class _FormSectionState extends State<_FormSection> {
               hintText: 'Your email address',
               prefixIcon: Icons.email_rounded,
               inputType: TextInputType.emailAddress,
+              errorText:
+                  state.email.isNotValid ? 'Invalid email format!' : null,
             ),
             Dimens.dp16.height,
             PasswordInput(
               controller: passwordController,
               label: 'Password',
               hintText: 'Your password',
+              errorText: state.password.isNotValid
+                  ? 'Password length at least 6 characters!'
+                  : null,
             ),
             Dimens.dp32.height,
             ElevatedButton(
-              onPressed: () {
-                context.read<AuthBloc>().add(
-                      LoginEvent(
-                        email: emailController.text,
-                        password: passwordController.text,
-                      ),
-                    );
-              },
+              onPressed: state.isLoginFormValid
+                  ? () {
+                      context.read<AuthBloc>().add(LoginEvent());
+                    }
+                  : null,
               child: const Text('Log in'),
             ),
           ],

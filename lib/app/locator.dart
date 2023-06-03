@@ -8,6 +8,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shamo_mobile/app/config.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
+import 'package:shamo_mobile/features/product/data/repositories/product_repository.dart';
+import 'package:shamo_mobile/features/product/product.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
 
 final getIt = GetIt.instance;
@@ -46,10 +48,40 @@ Future<void> setupLocator() async {
       fetchUserUseCase: getIt(),
       loginUseCase: getIt(),
       logoutUseCase: getIt(),
+      registerUseCase: getIt(),
     ),
   );
 
   // ------------------------------ END AUTHENTICATION -----------------------------
+
+  // ------------------------------ PRODUCT ---------------------------------
+  getIt
+    ..registerLazySingleton<ProductApiDataSource>(
+      () => ProductApiDataSourceImpl(getIt()),
+    )
+    ..registerLazySingleton<ProductRepository>(
+      () => ProductRepositoryImpl(getIt()),
+    );
+
+  // Domain
+  getIt
+    ..registerLazySingleton(() => FetchCategoriesUseCase(getIt()))
+    ..registerLazySingleton(() => FetchListProductUseCase(getIt()))
+    ..registerLazySingleton(() => FetchProductUseCase(getIt()));
+
+  // Presentation
+  getIt
+    ..registerFactory(
+      () => CategoryBloc(fetchCategoriesUseCase: getIt()),
+    )
+    ..registerFactory(
+      () => PopularBloc(fetchListProductUseCase: getIt()),
+    )
+    ..registerFactory(
+      () => ProductBloc(fetchListProductUseCase: getIt()),
+    );
+
+  // ------------------------------ END PRODUCT -----------------------------
 
   // ------------------------------ SETTINGS ---------------------------------
 
@@ -90,7 +122,8 @@ Future<void> setupLocator() async {
         getThemeSetting: getIt(),
         saveThemeSetting: getIt(),
       ),
-    );
+    )
+    ..registerFactory(() => UserBloc(fetchUserUseCase: getIt()));
 
   // ------------------------------ END SETTINGS -------------------------------
 

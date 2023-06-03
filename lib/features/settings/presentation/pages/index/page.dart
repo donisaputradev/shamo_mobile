@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
@@ -31,8 +32,11 @@ class AccountPage extends StatelessWidget {
           BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state.status == AuthStateStatus.unauthenticated) {
+                EasyLoading.dismiss();
                 Navigator.pushNamedAndRemoveUntil(
                     context, LoginPage.routeName, (route) => false);
+              } else if (state.status == AuthStateStatus.loading) {
+                EasyLoading.show(status: 'Loading...');
               }
             },
             child: OutlinedButton(

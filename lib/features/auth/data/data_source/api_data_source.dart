@@ -59,6 +59,7 @@ class AuthApiDataSourceImpl implements AuthApiDataSource {
   }) async {
     try {
       final response = await dio.post('/register', data: {
+        'name': name,
         'email': email,
         'username': username,
         'phone_number': phoneNumber,

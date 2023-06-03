@@ -9,7 +9,7 @@ class DarkTheme {
   static Color disabledTextColor = AppColors.light[900]!;
   static Color secondaryColor = AppColors.secondary;
   static Color disabledColor = AppColors.light[900]!;
-  static Color textSolidColor = AppColors.light;
+  static Color textSolidColor = AppColors.light[300]!;
   static Color errorColor = AppColors.alert;
   static Color dividerColor = AppColors.light[900]!;
   static Color inputBackgroundColor = AppColors.dark[300]!;

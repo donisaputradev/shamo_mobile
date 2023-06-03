@@ -25,8 +25,8 @@ class SkeletonAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: baseColor ?? Colors.grey[300]!,
-      highlightColor: highlightColor ?? Colors.grey[100]!,
+      baseColor: baseColor ?? Colors.grey[300]!.withOpacity(.3),
+      highlightColor: highlightColor ?? Colors.grey[100]!.withOpacity(.5),
       child: child ??
           Container(
             width: width ?? double.infinity,

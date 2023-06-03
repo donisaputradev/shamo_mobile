@@ -5,20 +5,28 @@ class _ProfileSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              HeadingText('Halo, Alex'),
-              RegularText('@alexkhein'),
-            ],
-          ),
-        ),
-        Dimens.dp16.width,
-        Image.asset(MainAssets.user, width: Dimens.dp50),
-      ],
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        return Row(
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  HeadingText(
+                    'Halo, ${state.user?.name ?? ''}',
+                    maxLine: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  RegularText('@${state.user?.username ?? ''}'),
+                ],
+              ),
+            ),
+            Dimens.dp16.width,
+            Image.asset(MainAssets.user, width: Dimens.dp50),
+          ],
+        );
+      },
     );
   }
 }
