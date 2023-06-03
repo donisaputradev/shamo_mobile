@@ -8,7 +8,7 @@ class LogoutUseCase implements UseCaseFuture<Failure, bool, NoParams> {
   final AuthRepository authRepository;
 
   @override
-  Future<Either<Failure, bool>> call(NoParams params) {
-    return authRepository.logout();
+  Future<Either<Failure, bool>> call(NoParams params) async {
+    return await authRepository.logout();
   }
 }

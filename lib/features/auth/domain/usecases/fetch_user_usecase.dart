@@ -8,7 +8,7 @@ class FetchUserUseCase implements UseCaseFuture<Failure, User, NoParams> {
   final AuthRepository authRepository;
 
   @override
-  Future<Either<Failure, User>> call(NoParams params) {
-    return authRepository.fetchUser();
+  Future<Either<Failure, User>> call(NoParams params) async {
+    return await authRepository.fetchUser();
   }
 }

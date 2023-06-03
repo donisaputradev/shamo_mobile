@@ -26,7 +26,7 @@ class _SplashPageState extends State<SplashPage> {
         if (state.status == AuthStateStatus.authenticated) {
           Navigator.pushNamedAndRemoveUntil(
               context, MainPage.routeName, (route) => false);
-        } else {
+        } else if (state.status == AuthStateStatus.unauthenticated) {
           Navigator.pushNamedAndRemoveUntil(
               context, LoginPage.routeName, (route) => false);
         }

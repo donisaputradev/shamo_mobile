@@ -42,7 +42,11 @@ Future<void> setupLocator() async {
 
   // Presentation
   getIt.registerFactory(
-    () => AuthBloc(fetchUserUseCase: getIt()),
+    () => AuthBloc(
+      fetchUserUseCase: getIt(),
+      loginUseCase: getIt(),
+      logoutUseCase: getIt(),
+    ),
   );
 
   // ------------------------------ END AUTHENTICATION -----------------------------

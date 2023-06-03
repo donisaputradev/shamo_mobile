@@ -20,7 +20,8 @@ class AuthHttpInterceptor extends InterceptorsWrapper {
     final optionHeaders = <String, Object>{};
 
     if (token != null) {
-      optionHeaders.putIfAbsent('Authorization', () => 'Bearer $token');
+      optionHeaders.putIfAbsent(
+          'Authorization', () => '${token.tokenType} ${token.accessToken}');
     }
 
     options.headers.addAll(optionHeaders);
@@ -39,11 +40,6 @@ class AuthHttpInterceptor extends InterceptorsWrapper {
       GetIt.I<AuthBloc>()
         ..add(LogoutEvent())
         ..add(InitializeAuthEvent());
-      final key = GetIt.I<GlobalKey<NavigatorState>>();
-      if (key.currentContext != null) {
-        Navigator.of(key.currentContext!)
-            .popUntil(ModalRoute.withName(LoginPage.routeName));
-      }
       onUnAuth?.call();
     }
     handler.next(err);

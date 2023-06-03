@@ -1,33 +1,81 @@
 part of '../page.dart';
 
-class _FormSection extends StatelessWidget {
+class _FormSection extends StatefulWidget {
   const _FormSection();
 
   @override
+  State<_FormSection> createState() => _FormSectionState();
+}
+
+class _FormSectionState extends State<_FormSection> {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    context.read<AuthBloc>().add(InitializeAuthEvent());
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        const RegularInput(
-          label: 'Email Address',
-          hintText: 'Your email address',
-          prefixIcon: Icons.email_rounded,
-          inputType: TextInputType.emailAddress,
-        ),
-        Dimens.dp16.height,
-        const PasswordInput(
-          label: 'Password',
-          hintText: 'Your password',
-        ),
-        Dimens.dp32.height,
-        ElevatedButton(
-          onPressed: () {
-            Navigator.pushNamedAndRemoveUntil(
-                context, MainPage.routeName, (route) => false);
-          },
-          child: const Text('Log in'),
-        ),
-      ],
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state.status == AuthStateStatus.loading) {
+          EasyLoading.show(status: 'Memuat');
+        } else if (state.status == AuthStateStatus.authenticated) {
+          EasyLoading.dismiss();
+          Navigator.pushNamedAndRemoveUntil(
+              context, MainPage.routeName, (route) => false);
+        } else if (state.status == AuthStateStatus.unauthenticated) {
+          EasyLoading.dismiss();
+        } else if (state.status == AuthStateStatus.failure ||
+            state.status == AuthStateStatus.unauthenticated) {
+          EasyLoading.dismiss();
+          EasyLoading.showError(
+            state.failure?.message ?? 'Something wrong!',
+          );
+        }
+      },
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            RegularInput(
+              controller: emailController,
+              label: 'Email Address',
+              hintText: 'Your email address',
+              prefixIcon: Icons.email_rounded,
+              inputType: TextInputType.emailAddress,
+            ),
+            Dimens.dp16.height,
+            PasswordInput(
+              controller: passwordController,
+              label: 'Password',
+              hintText: 'Your password',
+            ),
+            Dimens.dp32.height,
+            ElevatedButton(
+              onPressed: () {
+                context.read<AuthBloc>().add(
+                      LoginEvent(
+                        email: emailController.text,
+                        password: passwordController.text,
+                      ),
+                    );
+              },
+              child: const Text('Log in'),
+            ),
+          ],
+        );
+      },
     );
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
   }
 }

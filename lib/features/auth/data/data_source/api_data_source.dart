@@ -79,13 +79,9 @@ class AuthApiDataSourceImpl implements AuthApiDataSource {
   @override
   Future<bool> logout() async {
     try {
-      final response = await dio.post('/logout');
-      if (response.statusCode == 200) {
-        authLocalDataSource.clearCache();
-        return true;
-      } else {
-        return false;
-      }
+      await dio.post('/logout');
+      await authLocalDataSource.clearCache();
+      return true;
     } on DioError catch (e) {
       throw e.toServerException();
     }

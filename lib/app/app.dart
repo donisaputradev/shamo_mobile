@@ -60,7 +60,7 @@ class _AppWidgetState extends State<_AppWidget> {
       ..radius = 16
       ..errorWidget
       ..backgroundColor = context.theme.canvasColor
-      ..indicatorColor = context.theme.primaryColor
+      ..indicatorColor = AppColors.primary
       ..textColor = context.theme.shadowColor
       ..dismissOnTap = false
       ..animationStyle = EasyLoadingAnimationStyle.offset;

@@ -3,9 +3,8 @@ import 'package:shamo_mobile/core/core.dart';
 
 extension DioErrorExtension on DioError {
   ServerException toServerException() {
-    final data = response?.data != null && response?.data['meta'] != null
-        ? Meta.fromJson(response?.data['meta'])
-        : null;
+    final data =
+        response?.data is String ? null : Meta.fromJson(response?.data['meta']);
     switch (type) {
       case DioErrorType.badResponse:
         switch (response?.statusCode) {

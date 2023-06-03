@@ -9,8 +9,8 @@ class RegisterUseCase implements UseCaseFuture<Failure, bool, RegisterParams> {
   final AuthRepository authRepository;
 
   @override
-  Future<Either<Failure, bool>> call(RegisterParams params) {
-    return authRepository.register(
+  Future<Either<Failure, bool>> call(RegisterParams params) async {
+    return await authRepository.register(
       email: params.email,
       password: params.password,
       name: params.name,

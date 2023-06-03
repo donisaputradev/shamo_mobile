@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shamo_mobile/core/core.dart';
 import 'package:shamo_mobile/features/auth/auth.dart';
 import 'package:shamo_mobile/features/settings/settings.dart';
@@ -27,12 +28,19 @@ class AccountPage extends StatelessWidget {
           Dimens.dp8.height,
           const _GeneralSection(),
           (Dimens.height(context) / 10).height,
-          OutlinedButton(
-            onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, LoginPage.routeName, (route) => false);
+          BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state.status == AuthStateStatus.unauthenticated) {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, LoginPage.routeName, (route) => false);
+              }
             },
-            child: const Text('Log out'),
+            child: OutlinedButton(
+              onPressed: () {
+                context.read<AuthBloc>().add(LogoutEvent());
+              },
+              child: const Text('Log out'),
+            ),
           ),
         ],
       ),
